@@ -46,7 +46,7 @@ func main() {
 	http.ListenAndServe(":"+port, nil)
 }
 
-}
+
 
 func getPages(filename string) map[string]page{
     pages := make (map[string]page);
