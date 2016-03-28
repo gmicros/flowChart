@@ -13,7 +13,7 @@ type page struct {
     NoLink string
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {    
+func handler(w http.ResponseWriter, r *http.Request) {        
     var p page;
     var t *template.Template;
     if r.URL.Path[1:] == "" {
@@ -37,7 +37,15 @@ func main() {
     
     http.HandleFunc("/", handler)
     http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("http/css"))))
-    http.ListenAndServe(":8080", nil)    
+    //http.ListenAndServe(":8080", nil)    
+
+    port := os.Getenv("PORT")
+    if port == "" {
+	port = "8080"
+    }
+	http.ListenAndServe(":"+port, nil)
+}
+
 }
 
 func getPages(filename string) map[string]page{
